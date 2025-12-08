@@ -1,10 +1,37 @@
 import { Link } from 'react-router';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { clearError } from '../store/features/auth/authSlice';
 
 export default function Home() {
+  const { error } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900">
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-8 sm:py-12 md:py-16">
+        {/* Error Alert */}
+        {error && (
+          <div className="max-w-3xl mx-auto mb-6">
+            <div className="bg-red-500/10 border border-red-500 rounded-lg p-4 flex items-start gap-3">
+              <svg className="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div className="flex-1">
+                <p className="text-red-100 text-sm sm:text-base">{error}</p>
+              </div>
+              <button
+                onClick={() => dispatch(clearError())}
+                className="text-red-300 hover:text-red-100 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 drop-shadow-lg">
             🎸 Guitar Handbook
