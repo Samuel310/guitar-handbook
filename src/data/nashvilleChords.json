@@ -1,0 +1,150 @@
+{
+  "major": [
+    {
+      "key": "C Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["C", "Dm", "Em", "F", "G", "Am", "Bdim"],
+      "notes": ["C", "D", "E", "F", "G", "A", "B"]
+    },
+    {
+      "key": "G Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["G", "Am", "Bm", "C", "D", "Em", "F#dim"],
+      "notes": ["G", "A", "B", "C", "D", "E", "F#"]
+    },
+    {
+      "key": "D Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["D", "Em", "F#m", "G", "A", "Bm", "C#dim"],
+      "notes": ["D", "E", "F#", "G", "A", "B", "C#"]
+    },
+    {
+      "key": "A Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["A", "Bm", "C#m", "D", "E", "F#m", "G#dim"],
+      "notes": ["A", "B", "C#", "D", "E", "F#", "G#"]
+    },
+    {
+      "key": "E Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["E", "F#m", "G#m", "A", "B", "C#m", "D#dim"],
+      "notes": ["E", "F#", "G#", "A", "B", "C#", "D#"]
+    },
+    {
+      "key": "B Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["B", "C#m", "D#m", "E", "F#", "G#m", "A#dim"],
+      "notes": ["B", "C#", "D#", "E", "F#", "G#", "A#"]
+    },
+    {
+      "key": "F# Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["F#", "G#m", "A#m", "B", "C#", "D#m", "E#dim"],
+      "notes": ["F#", "G#", "A#", "B", "C#", "D#", "E#"]
+    },
+    {
+      "key": "Db Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Db", "Ebm", "Fm", "Gb", "Ab", "Bbm", "Cdim"],
+      "notes": ["Db", "Eb", "F", "Gb", "Ab", "Bb", "C"]
+    },
+    {
+      "key": "Ab Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Ab", "Bbm", "Cm", "Db", "Eb", "Fm", "Gdim"],
+      "notes": ["Ab", "Bb", "C", "Db", "Eb", "F", "G"]
+    },
+    {
+      "key": "Eb Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Eb", "Fm", "Gm", "Ab", "Bb", "Cm", "Ddim"],
+      "notes": ["Eb", "F", "G", "Ab", "Bb", "C", "D"]
+    },
+    {
+      "key": "Bb Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Bb", "Cm", "Dm", "Eb", "F", "Gm", "Adim"],
+      "notes": ["Bb", "C", "D", "Eb", "F", "G", "A"]
+    },
+    {
+      "key": "F Major",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["F", "Gm", "Am", "Bb", "C", "Dm", "Edim"],
+      "notes": ["F", "G", "A", "Bb", "C", "D", "E"]
+    }
+  ],
+  "minor": [
+    {
+      "key": "A Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Am", "Bdim", "C", "Dm", "Em", "F", "G"],
+      "notes": ["A", "B", "C", "D", "E", "F", "G"]
+    },
+    {
+      "key": "E Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Em", "F#dim", "G", "Am", "Bm", "C", "D"],
+      "notes": ["E", "F#", "G", "A", "B", "C", "D"]
+    },
+    {
+      "key": "B Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Bm", "C#dim", "D", "Em", "F#m", "G", "A"],
+      "notes": ["B", "C#", "D", "E", "F#", "G", "A"]
+    },
+    {
+      "key": "F# Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["F#m", "G#dim", "A", "Bm", "C#m", "D", "E"],
+      "notes": ["F#", "G#", "A", "B", "C#", "D", "E"]
+    },
+    {
+      "key": "C# Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["C#m", "D#dim", "E", "F#m", "G#m", "A", "B"],
+      "notes": ["C#", "D#", "E", "F#", "G#", "A", "B"]
+    },
+    {
+      "key": "G# Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["G#m", "A#dim", "B", "C#m", "D#m", "E", "F#"],
+      "notes": ["G#", "A#", "B", "C#", "D#", "E", "F#"]
+    },
+    {
+      "key": "D# Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["D#m", "E#dim", "F#", "G#m", "A#m", "B", "C#"],
+      "notes": ["D#", "E#", "F#", "G#", "A#", "B", "C#"]
+    },
+    {
+      "key": "Bb Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Bbm", "Cdim", "Db", "Ebm", "Fm", "Gb", "Ab"],
+      "notes": ["Bb", "C", "Db", "Eb", "F", "Gb", "Ab"]
+    },
+    {
+      "key": "F Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Fm", "Gdim", "Ab", "Bbm", "Cm", "Db", "Eb"],
+      "notes": ["F", "G", "Ab", "Bb", "C", "Db", "Eb"]
+    },
+    {
+      "key": "C Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Cm", "Ddim", "Eb", "Fm", "Gm", "Ab", "Bb"],
+      "notes": ["C", "D", "Eb", "F", "G", "Ab", "Bb"]
+    },
+    {
+      "key": "G Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Gm", "Adim", "Bb", "Cm", "Dm", "Eb", "F"],
+      "notes": ["G", "A", "Bb", "C", "D", "Eb", "F"]
+    },
+    {
+      "key": "D Minor",
+      "nashville": ["1", "2", "3", "4", "5", "6", "7"],
+      "chords": ["Dm", "Edim", "F", "Gm", "Am", "Bb", "C"],
+      "notes": ["D", "E", "F", "G", "A", "Bb", "C"]
+    }
+  ]
+}
