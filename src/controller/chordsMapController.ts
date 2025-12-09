@@ -15,7 +15,6 @@ export const loadChordsMap =
     try {
       const state = getState();
       if (state.chordsMap.isLoaded && state.chordsMap.chordsMap.length > 0) {
-        console.log("Chords map already loaded from state");
         return;
       }
 
