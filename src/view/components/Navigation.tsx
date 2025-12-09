@@ -18,13 +18,13 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="bg-slate-900/95 backdrop-blur shadow-lg sticky top-0 z-50 border-b border-slate-700">
+    <nav className="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-amber-200">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link
             to="/"
             onClick={handleLinkClick}
-            className="text-xl sm:text-2xl font-bold text-white hover:text-purple-400 transition-colors"
+            className="text-xl sm:text-2xl font-bold text-amber-900 hover:text-orange-600 transition-colors"
           >
             🎸 Guitar Handbook
           </Link>
@@ -32,7 +32,7 @@ export default function Navigation() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white p-2 hover:bg-slate-800 rounded-lg transition-colors"
+            className="md:hidden text-amber-900 p-2 hover:bg-amber-100 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             <svg
@@ -65,8 +65,8 @@ export default function Navigation() {
               to="/"
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                 isActive('/')
-                  ? 'bg-purple-600 text-white'
-                  : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                  ? 'bg-amber-500 text-white shadow-md'
+                  : 'text-stone-700 hover:bg-amber-100 hover:text-amber-900'
               }`}
             >
               Home
@@ -77,8 +77,8 @@ export default function Navigation() {
                   to="/nashville"
                   className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                     isActive('/nashville')
-                      ? 'bg-purple-600 text-white'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      ? 'bg-amber-500 text-white shadow-md'
+                      : 'text-stone-700 hover:bg-amber-100 hover:text-amber-900'
                   }`}
                 >
                   Nashville
@@ -87,8 +87,8 @@ export default function Navigation() {
                   to="/songbook"
                   className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                     location.pathname.startsWith('/songbook')
-                      ? 'bg-blue-600 text-white'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      ? 'bg-orange-500 text-white shadow-md'
+                      : 'text-stone-700 hover:bg-amber-100 hover:text-amber-900'
                   }`}
                 >
                   Song Book
@@ -103,13 +103,13 @@ export default function Navigation() {
                   <img 
                     src={user.photoURL} 
                     alt={`${user.displayName || 'User'}'s profile picture`} 
-                    className="w-8 h-8 rounded-full border-2 border-purple-500"
+                    className="w-8 h-8 rounded-full border-2 border-amber-400"
                   />
                 )}
                 <button
                   onClick={() => dispatch(authController.signOut())}
                   disabled={isLoading}
-                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-50"
+                  className="px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 shadow-sm"
                 >
                   Logout
                 </button>
@@ -118,7 +118,7 @@ export default function Navigation() {
               <button
                 onClick={() => dispatch(authController.signInWithGoogle(null))}
                 disabled={isLoading}
-                className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center gap-2 ml-2"
+                className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center gap-2 ml-2 shadow-sm"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -152,8 +152,8 @@ export default function Navigation() {
               onClick={handleLinkClick}
               className={`block px-4 py-2 rounded-lg font-semibold transition-all ${
                 isActive('/')
-                  ? 'bg-purple-600 text-white'
-                  : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                  ? 'bg-amber-500 text-white shadow-md'
+                  : 'text-stone-700 hover:bg-amber-100 hover:text-amber-900'
               }`}
             >
               Home
@@ -165,8 +165,8 @@ export default function Navigation() {
                   onClick={handleLinkClick}
                   className={`block px-4 py-2 rounded-lg font-semibold transition-all ${
                     isActive('/nashville')
-                      ? 'bg-purple-600 text-white'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      ? 'bg-amber-500 text-white shadow-md'
+                      : 'text-stone-700 hover:bg-amber-100 hover:text-amber-900'
                   }`}
                 >
                   Nashville
@@ -176,8 +176,8 @@ export default function Navigation() {
                   onClick={handleLinkClick}
                   className={`block px-4 py-2 rounded-lg font-semibold transition-all ${
                     location.pathname.startsWith('/songbook')
-                      ? 'bg-blue-600 text-white'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      ? 'bg-orange-500 text-white shadow-md'
+                      : 'text-stone-700 hover:bg-amber-100 hover:text-amber-900'
                   }`}
                 >
                   Song Book
@@ -187,13 +187,13 @@ export default function Navigation() {
             
             {/* Mobile Auth buttons */}
             {isAuthenticated ? (
-              <div className="pt-2 border-t border-slate-700 mt-2">
+              <div className="pt-2 border-t border-amber-200 mt-2">
                 {user?.photoURL && (
-                  <div className="flex items-center gap-2 px-4 py-2 text-slate-300">
+                  <div className="flex items-center gap-2 px-4 py-2 text-stone-700">
                     <img 
                       src={user.photoURL} 
                       alt={`${user.displayName || 'User'}'s profile picture`} 
-                      className="w-8 h-8 rounded-full border-2 border-purple-500"
+                      className="w-8 h-8 rounded-full border-2 border-amber-400"
                     />
                     <span className="text-sm">{user.displayName || user.email}</span>
                   </div>
@@ -204,7 +204,7 @@ export default function Navigation() {
                     handleLinkClick();
                   }}
                   disabled={isLoading}
-                  className="w-full px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-50"
+                  className="w-full px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 shadow-sm"
                 >
                   Logout
                 </button>
@@ -216,7 +216,7 @@ export default function Navigation() {
                   handleLinkClick();
                 }}
                 disabled={isLoading}
-                className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path

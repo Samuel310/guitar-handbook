@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+/* Elegant Music Player Theme - Warm, Bright, Eye-Comforting */
+body {
+  background: linear-gradient(to bottom right, #fffbeb, #ffedd5, #fff1f2);
+  color: #292524;
+  min-height: 100vh;
+}
