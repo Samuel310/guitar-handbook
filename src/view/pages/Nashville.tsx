@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import nashvilleData from '../data/nashvilleChords.json';
+import nashvilleData from '../../model/nashvilleChords.json';
 
 interface ChordData {
   key: string;
@@ -16,7 +16,7 @@ export default function Nashville() {
   const selectedChordData = currentData.find(item => item.key === selectedKey) || currentData[0];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 p-4 sm:p-6 md:p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 sm:mb-8 text-center">
           Nashville Number System
@@ -72,7 +72,7 @@ export default function Nashville() {
 
         {/* Chords Table */}
         <div className="bg-slate-800 rounded-lg shadow-2xl overflow-hidden">
-          <div className="p-4 sm:p-6 bg-gradient-to-r from-purple-600 to-pink-600">
+          <div className="p-4 sm:p-6 bg-linear-to-r from-purple-600 to-pink-600">
             <h2 className="text-xl sm:text-2xl font-bold text-white text-center">
               {selectedChordData.key}
             </h2>

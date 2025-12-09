@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
-import Navigation from './components/Navigation';
-import ProtectedRoute from './components/ProtectedRoute';
-import Home from './pages/Home';
-import Nashville from './pages/Nashville';
-import SongBook from './pages/SongBook';
-import SongEditor from './pages/SongEditor';
-import SongDetail from './pages/SongDetail';
-import { useAuthListener } from './hooks/useAuthListener';
+import Navigation from './view/components/Navigation';
+import ProtectedRoute from './view/components/ProtectedRoute';
+import Home from './view/pages/Home';
+import Nashville from './view/pages/Nashville';
+import SongBook from './view/pages/SongBook';
+import SongEditor from './view/pages/SongEditor';
+import SongDetail from './view/pages/SongDetail';
+import { useAuthListener } from './view/hooks/useAuthListener';
 
 function App() {
   // Initialize auth listener

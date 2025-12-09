@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { updateSong, deleteSong } from '../store/features/songBook/songBookSlice';
+import { useStateSelector, useAppDispatch } from '../../store/hooks';
+import { updateSong, deleteSong } from '../../store/slice/songBookSlice';
 
 export default function SongDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const song = useAppSelector((state) =>
+  const song = useStateSelector((state) =>
     state.songBook.songs.find((s) => s.id === id)
   );
 
@@ -17,7 +17,7 @@ export default function SongDetail() {
 
   if (!song) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-8">
+      <div className="min-h-screen bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 p-8">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl font-bold text-white mb-4">Song Not Found</h1>
           <button
@@ -55,7 +55,7 @@ export default function SongDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 p-4 sm:p-6 md:p-8">
       <div className="max-w-4xl mx-auto">
         <div className="bg-slate-800 rounded-lg shadow-2xl p-4 sm:p-6 md:p-8">
           {/* Header */}

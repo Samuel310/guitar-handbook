@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
-import { useAppSelector, useAppDispatch } from '../store/hooks';
-import { signInWithGoogle, signOut } from '../store/features/auth/authSlice';
+import { useStateSelector, useAppDispatch } from '../../store/hooks';
+import * as authController from "../../controller/authController";
 
 export default function Navigation() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, isAuthenticated, isLoading } = useAppSelector((state) => state.auth);
+  const { user, isAuthenticated, isLoading } = useStateSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const isActive = (path: string) => {
@@ -107,7 +107,7 @@ export default function Navigation() {
                   />
                 )}
                 <button
-                  onClick={() => dispatch(signOut())}
+                  onClick={() => dispatch(authController.signOut())}
                   disabled={isLoading}
                   className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-50"
                 >
@@ -116,7 +116,7 @@ export default function Navigation() {
               </div>
             ) : (
               <button
-                onClick={() => dispatch(signInWithGoogle())}
+                onClick={() => dispatch(authController.signInWithGoogle(null))}
                 disabled={isLoading}
                 className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 flex items-center gap-2 ml-2"
               >
@@ -200,7 +200,7 @@ export default function Navigation() {
                 )}
                 <button
                   onClick={() => {
-                    dispatch(signOut());
+                    dispatch(authController.signOut());
                     handleLinkClick();
                   }}
                   disabled={isLoading}
@@ -212,7 +212,7 @@ export default function Navigation() {
             ) : (
               <button
                 onClick={() => {
-                  dispatch(signInWithGoogle());
+                  dispatch(authController.signInWithGoogle(null));
                   handleLinkClick();
                 }}
                 disabled={isLoading}
