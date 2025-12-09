@@ -1,10 +1,56 @@
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { setPendingNavigation } from '../../store/slice/authSlice';
+import * as authController from "../../controller/authController";
 
 export default function Home() {
+  const { error, isAuthenticated, pendingNavigation } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated && pendingNavigation) {
+      navigate(pendingNavigation);
+      dispatch(setPendingNavigation(null));
+    }
+  }, [isAuthenticated, pendingNavigation, navigate, dispatch]);
+
+  const handleCardClick = (path: string) => {
+    if (isAuthenticated) {
+      navigate(path);
+    } else {
+      dispatch(authController.signInWithGoogle(path));
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900">
+    <div className="min-h-screen bg-linear-to-br from-slate-900 via-indigo-900 to-slate-900">
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-8 sm:py-12 md:py-16">
+        {/* Error Alert */}
+        {error && (
+          <div className="max-w-3xl mx-auto mb-6">
+            <div className="bg-red-500/10 border border-red-500 rounded-lg p-4 flex items-start gap-3">
+              <svg className="w-6 h-6 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div className="flex-1">
+                <p className="text-red-100 text-sm sm:text-base">{error}</p>
+              </div>
+              <button
+                aria-label="Dismiss error"
+                onClick={() => dispatch(authController.dismissError())}
+                className="text-red-300 hover:text-red-100 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 drop-shadow-lg">
             🎸 Guitar Handbook
@@ -17,9 +63,9 @@ export default function Home() {
         {/* Feature Cards */}
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
           {/* Nashville Card */}
-          <Link
-            to="/nashville"
-            className="group bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105 transform"
+          <button
+            onClick={() => handleCardClick('/nashville')}
+            className="group bg-linear-to-br from-purple-600 to-pink-600 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105 transform text-left"
           >
             <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">🎵</div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
@@ -35,12 +81,12 @@ export default function Home() {
                 →
               </span>
             </div>
-          </Link>
+          </button>
 
           {/* Song Book Card */}
-          <Link
-            to="/songbook"
-            className="group bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-blue-500/50 transition-all hover:scale-105 transform"
+          <button
+            onClick={() => handleCardClick('/songbook')}
+            className="group bg-linear-to-br from-blue-600 to-cyan-600 rounded-2xl p-6 sm:p-8 shadow-2xl hover:shadow-blue-500/50 transition-all hover:scale-105 transform text-left"
           >
             <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4">📖</div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
@@ -56,7 +102,7 @@ export default function Home() {
                 →
               </span>
             </div>
-          </Link>
+          </button>
         </div>
 
         {/* Info Section */}

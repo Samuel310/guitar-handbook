@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useAppDispatch } from '../store/hooks';
-import { addSong } from '../store/features/songBook/songBookSlice';
+import { useAppDispatch } from '../../store/hooks';
+import { addSong } from '../../store/slice/songBookSlice';
 
 export default function SongEditor() {
   const [title, setTitle] = useState('');
@@ -20,7 +20,7 @@ export default function SongEditor() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 p-4 sm:p-6 md:p-8">
       <div className="max-w-4xl mx-auto">
         <div className="bg-slate-800 rounded-lg shadow-2xl p-4 sm:p-6 md:p-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6">Add New Song</h1>
