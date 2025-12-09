@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router';
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { updateSong, deleteSong } from '../../store/slice/songBookSlice';
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import * as songBookController from "../../controller/songBookController";
 
 export default function SongDetail() {
   const { id } = useParams<{ id: string }>();
@@ -10,10 +10,12 @@ export default function SongDetail() {
   const song = useAppSelector((state) =>
     state.songBook.songs.find((s) => s.id === id)
   );
+  const user = useAppSelector((state) => state.auth.user);
+  const isLoading = useAppSelector((state) => state.songBook.isLoading);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   if (!song) {
     return (
@@ -21,7 +23,7 @@ export default function SongDetail() {
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl font-bold text-white mb-4">Song Not Found</h1>
           <button
-            onClick={() => navigate('/songbook')}
+            onClick={() => navigate("/songbook")}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
           >
             Back to Song Book
@@ -31,26 +33,42 @@ export default function SongDetail() {
     );
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!title.trim()) {
-      alert('Please enter a song title');
+      alert("Please enter a song title");
       return;
     }
 
-    dispatch(
-      updateSong({
-        ...song,
-        title,
-        content,
-      })
-    );
-    setIsEditing(false);
+    if (!user?.uid || !song) {
+      alert("You must be logged in to edit songs");
+      return;
+    }
+
+    try {
+      await dispatch(
+        songBookController.updateSong(user.uid, song.id, title, content)
+      );
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to update song:", error);
+      alert("Failed to update song. Please try again.");
+    }
   };
 
-  const handleDelete = () => {
-    if (confirm('Are you sure you want to delete this song?')) {
-      dispatch(deleteSong(song.id));
-      navigate('/songbook');
+  const handleDelete = async () => {
+    if (!user?.uid || !song) {
+      alert("You must be logged in to delete songs");
+      return;
+    }
+
+    if (confirm("Are you sure you want to delete this song?")) {
+      try {
+        await dispatch(songBookController.deleteSong(user.uid, song.id));
+        navigate("/songbook");
+      } catch (error) {
+        console.error("Failed to delete song:", error);
+        alert("Failed to delete song. Please try again.");
+      }
     }
   };
 
@@ -69,7 +87,9 @@ export default function SongDetail() {
                   className="w-full bg-slate-700 text-white px-3 sm:px-4 py-2 rounded-lg border-2 border-slate-600 focus:border-blue-500 focus:outline-none text-xl sm:text-2xl font-bold"
                 />
               ) : (
-                <h1 className="text-2xl sm:text-3xl font-bold text-white">{song.title}</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-white">
+                  {song.title}
+                </h1>
               )}
               <p className="text-slate-400 text-sm mt-2">
                 Last updated: {new Date(song.updatedAt).toLocaleString()}
@@ -88,7 +108,7 @@ export default function SongDetail() {
               />
             ) : (
               <div className="bg-slate-700 rounded-lg p-6 text-white whitespace-pre-wrap font-mono">
-                {song.content || 'No content yet.'}
+                {song.content || "No content yet."}
               </div>
             )}
           </div>
@@ -99,9 +119,10 @@ export default function SongDetail() {
               <>
                 <button
                   onClick={handleSave}
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors"
+                  disabled={isLoading}
+                  className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Save Changes
+                  {isLoading ? "Saving..." : "Save Changes"}
                 </button>
                 <button
                   onClick={() => {
@@ -109,7 +130,8 @@ export default function SongDetail() {
                     setContent(song.content);
                     setIsEditing(false);
                   }}
-                  className="flex-1 bg-slate-600 hover:bg-slate-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors"
+                  disabled={isLoading}
+                  className="flex-1 bg-slate-600 hover:bg-slate-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Cancel
                 </button>
@@ -122,19 +144,22 @@ export default function SongDetail() {
                     setContent(song.content);
                     setIsEditing(true);
                   }}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors"
+                  disabled={isLoading}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Edit Song
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors"
+                  disabled={isLoading}
+                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Delete
+                  {isLoading ? "Deleting..." : "Delete"}
                 </button>
                 <button
-                  onClick={() => navigate('/songbook')}
-                  className="w-full sm:w-auto bg-slate-600 hover:bg-slate-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors"
+                  onClick={() => navigate("/songbook")}
+                  disabled={isLoading}
+                  className="w-full sm:w-auto bg-slate-600 hover:bg-slate-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Back
                 </button>

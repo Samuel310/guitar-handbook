@@ -1,29 +1,43 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useAppDispatch } from '../../store/hooks';
-import { addSong } from '../../store/slice/songBookSlice';
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import * as songBookController from "../../controller/songBookController";
 
 export default function SongEditor() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.auth.user);
+  const isLoading = useAppSelector((state) => state.songBook.isLoading);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!title.trim()) {
-      alert('Please enter a song title');
+      alert("Please enter a song title");
       return;
     }
 
-    dispatch(addSong({ title, content }));
-    navigate('/songbook');
+    if (!user?.uid) {
+      alert("You must be logged in to save songs");
+      return;
+    }
+
+    try {
+      await dispatch(songBookController.createSong(user.uid, title, content));
+      navigate("/songbook");
+    } catch (error) {
+      console.error("Failed to save song:", error);
+      alert("Failed to save song. Please try again.");
+    }
   };
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 p-4 sm:p-6 md:p-8">
       <div className="max-w-4xl mx-auto">
         <div className="bg-slate-800 rounded-lg shadow-2xl p-4 sm:p-6 md:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6">Add New Song</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6">
+            Add New Song
+          </h1>
 
           {/* Title Input */}
           <div className="mb-6">
@@ -45,7 +59,8 @@ export default function SongEditor() {
               Song Lyrics & Chords
             </label>
             <p className="text-slate-400 text-sm mb-3">
-              Tip: Write chord names above the lyrics where you want them to appear
+              Tip: Write chord names above the lyrics where you want them to
+              appear
             </p>
             <textarea
               value={content}
@@ -60,13 +75,15 @@ export default function SongEditor() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
               onClick={handleSave}
-              className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors"
+              disabled={isLoading}
+              className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Save Song
+              {isLoading ? "Saving..." : "Save Song"}
             </button>
             <button
-              onClick={() => navigate('/songbook')}
-              className="flex-1 bg-slate-600 hover:bg-slate-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors"
+              onClick={() => navigate("/songbook")}
+              disabled={isLoading}
+              className="flex-1 bg-slate-600 hover:bg-slate-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>

@@ -1,69 +1,69 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type Song from "../../model/Song";
 
-export interface Song {
-  id: string;
-  title: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-}
+export type { Song };
 
 interface SongBookState {
   songs: Song[];
+  isLoading: boolean;
+  error: string | null;
 }
 
-const loadSongsFromLocalStorage = (): Song[] => {
-  try {
-    const stored = localStorage.getItem('guitarHandbookSongs');
-    return stored ? JSON.parse(stored) : [];
-  } catch {
-    return [];
-  }
-};
-
-const saveSongsToLocalStorage = (songs: Song[]) => {
-  try {
-    localStorage.setItem('guitarHandbookSongs', JSON.stringify(songs));
-  } catch (error) {
-    console.error('Failed to save songs:', error);
-  }
-};
-
 const initialState: SongBookState = {
-  songs: loadSongsFromLocalStorage(),
+  songs: [],
+  isLoading: false,
+  error: null,
 };
 
 const songBookSlice = createSlice({
-  name: 'songBook',
+  name: "songBook",
   initialState,
   reducers: {
-    addSong: (state, action: PayloadAction<Omit<Song, 'id' | 'createdAt' | 'updatedAt'>>) => {
-      const newSong: Song = {
-        ...action.payload,
-        id: Date.now().toString(),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      state.songs.push(newSong);
-      saveSongsToLocalStorage(state.songs);
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     },
-    updateSong: (state, action: PayloadAction<Song>) => {
-      const index = state.songs.findIndex(song => song.id === action.payload.id);
-      if (index !== -1) {
-        state.songs[index] = {
-          ...action.payload,
-          updatedAt: new Date().toISOString(),
-        };
-        saveSongsToLocalStorage(state.songs);
+    setSongs: (state, action: PayloadAction<Song[]>) => {
+      state.songs = action.payload;
+      state.isLoading = false;
+    },
+    addSongToState: (state, action: PayloadAction<Song>) => {
+      const exists = state.songs.some((song) => song.id === action.payload.id);
+      if (!exists) {
+        state.songs.unshift(action.payload);
       }
+      state.isLoading = false;
     },
-    deleteSong: (state, action: PayloadAction<string>) => {
-      state.songs = state.songs.filter(song => song.id !== action.payload);
-      saveSongsToLocalStorage(state.songs);
+    updateSongInState: (state, action: PayloadAction<Song>) => {
+      const index = state.songs.findIndex(
+        (song) => song.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.songs[index] = action.payload;
+      }
+      state.isLoading = false;
+    },
+    deleteSongFromState: (state, action: PayloadAction<string>) => {
+      state.songs = state.songs.filter((song) => song.id !== action.payload);
+      state.isLoading = false;
+    },
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    },
+    clearError: (state) => {
+      state.error = null;
     },
   },
 });
 
-export const { addSong, updateSong, deleteSong } = songBookSlice.actions;
+export const {
+  setLoading,
+  setSongs,
+  addSongToState,
+  updateSongInState,
+  deleteSongFromState,
+  setError,
+  clearError,
+} = songBookSlice.actions;
 export default songBookSlice.reducer;

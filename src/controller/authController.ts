@@ -15,6 +15,7 @@ import {
 } from "../store/slice/authSlice";
 import type { AppDispatch } from "../store/store";
 import type User from "../model/User";
+import { resetSongsState } from "./songBookController";
 
 const mapFirebaseUser = (firebaseUser: FirebaseUser): User => ({
   uid: firebaseUser.uid,
@@ -56,6 +57,7 @@ const signOut = () => async (dispatch: AppDispatch) => {
 
     await firebaseSignOut(auth);
     dispatch(setUser(null));
+    dispatch(resetSongsState());
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : "Failed to sign out";
