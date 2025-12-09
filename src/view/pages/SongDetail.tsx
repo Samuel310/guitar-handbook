@@ -50,7 +50,9 @@ export default function SongDetail() {
       );
       setIsEditing(false);
     } catch (error) {
-      console.error("Failed to update song:", error);
+      if (import.meta.env.DEV) {
+        console.error("Failed to update song:", error);
+      }
       alert("Failed to update song. Please try again.");
     }
   };
@@ -66,7 +68,9 @@ export default function SongDetail() {
         await dispatch(songBookController.deleteSong(user.uid, song.id));
         navigate("/songbook");
       } catch (error) {
-        console.error("Failed to delete song:", error);
+        if (import.meta.env.DEV) {
+          console.error("Failed to delete song:", error);
+        }
         alert("Failed to delete song. Please try again.");
       }
     }

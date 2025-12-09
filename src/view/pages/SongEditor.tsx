@@ -26,7 +26,9 @@ export default function SongEditor() {
       await dispatch(songBookController.createSong(user.uid, title, content));
       navigate("/songbook");
     } catch (error) {
-      console.error("Failed to save song:", error);
+      if (import.meta.env.DEV) {
+        console.error("Failed to save song:", error);
+      }
       alert("Failed to save song. Please try again.");
     }
   };

@@ -46,7 +46,9 @@ const signInWithGoogle =
           ? error.message
           : "Failed to sign in with Google";
       dispatch(setError(errorMessage));
-      console.error("Google Sign-In Error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Google Sign-In Error:", error);
+      }
     }
   };
 
@@ -62,7 +64,9 @@ const signOut = () => async (dispatch: AppDispatch) => {
     const errorMessage =
       error instanceof Error ? error.message : "Failed to sign out";
     dispatch(setError(errorMessage));
-    console.error("Google Sign-Out Error:", error);
+    if (import.meta.env.DEV) {
+      console.error("Google Sign-Out Error:", error);
+    }
   }
 };
 

@@ -54,9 +54,11 @@ export const loadChordsMap =
       const errorMessage =
         error instanceof Error
           ? error.message
-          : "Failed to load chords map from Firestore";
+          : "Failed to load chords map";
       dispatch(setError(errorMessage));
-      console.error("Load Chords Map Error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Load Chords Map Error:", error);
+      }
     }
   };
 

@@ -55,7 +55,9 @@ export const loadSongs = (userId: string) => async (dispatch: AppDispatch) => {
         ? error.message
         : "Failed to load songs from Firestore";
     dispatch(setError(errorMessage));
-    console.error("Load Songs Error:", error);
+    if (import.meta.env.DEV) {
+      console.error("Load Songs Error:", error);
+    }
   } finally {
     dispatch(setLoading(false));
   }
@@ -89,7 +91,9 @@ export const loadSong =
           ? error.message
           : "Failed to load song from Firestore";
       dispatch(setError(errorMessage));
-      console.error("Load Song Error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Load Song Error:", error);
+      }
     } finally {
       dispatch(setLoading(false));
     }
@@ -127,7 +131,9 @@ export const createSong =
           ? error.message
           : "Failed to create song in Firestore";
       dispatch(setError(errorMessage));
-      console.error("Create Song Error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Create Song Error:", error);
+      }
       throw error;
     } finally {
       dispatch(setLoading(false));
@@ -172,7 +178,9 @@ export const updateSong =
           ? error.message
           : "Failed to update song in Firestore";
       dispatch(setError(errorMessage));
-      console.error("Update Song Error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Update Song Error:", error);
+      }
       throw error;
     } finally {
       dispatch(setLoading(false));
@@ -195,7 +203,9 @@ export const deleteSong =
           ? error.message
           : "Failed to delete song from Firestore";
       dispatch(setError(errorMessage));
-      console.error("Delete Song Error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Delete Song Error:", error);
+      }
       throw error;
     } finally {
       dispatch(setLoading(false));
