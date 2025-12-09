@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
-import { useStateSelector, useAppDispatch } from '../../store/hooks';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { setPendingNavigation } from '../../store/slice/authSlice';
 import * as authController from "../../controller/authController";
 
 export default function Home() {
-  const { error, isAuthenticated, pendingNavigation } = useStateSelector((state) => state.auth);
+  const { error, isAuthenticated, pendingNavigation } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -39,6 +39,7 @@ export default function Home() {
                 <p className="text-red-100 text-sm sm:text-base">{error}</p>
               </div>
               <button
+                aria-label="Dismiss error"
                 onClick={() => dispatch(authController.dismissError())}
                 className="text-red-300 hover:text-red-100 transition-colors"
               >

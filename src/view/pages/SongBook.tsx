@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { useStateSelector } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
 
 export default function SongBook() {
-  const songs = useStateSelector((state) => state.songBook.songs);
+  const songs = useAppSelector((state) => state.songBook.songs);
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredSongs = songs.filter((song) =>

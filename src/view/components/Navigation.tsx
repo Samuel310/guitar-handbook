@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
-import { useStateSelector, useAppDispatch } from '../../store/hooks';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import * as authController from "../../controller/authController";
 
 export default function Navigation() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, isAuthenticated, isLoading } = useStateSelector((state) => state.auth);
+  const { user, isAuthenticated, isLoading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const isActive = (path: string) => {
@@ -102,7 +102,7 @@ export default function Navigation() {
                 {user?.photoURL && (
                   <img 
                     src={user.photoURL} 
-                    alt={user.displayName || 'User'} 
+                    alt={`${user.displayName || 'User'}'s profile picture`} 
                     className="w-8 h-8 rounded-full border-2 border-purple-500"
                   />
                 )}
@@ -192,7 +192,7 @@ export default function Navigation() {
                   <div className="flex items-center gap-2 px-4 py-2 text-slate-300">
                     <img 
                       src={user.photoURL} 
-                      alt={user.displayName || 'User'} 
+                      alt={`${user.displayName || 'User'}'s profile picture`} 
                       className="w-8 h-8 rounded-full border-2 border-purple-500"
                     />
                     <span className="text-sm">{user.displayName || user.email}</span>

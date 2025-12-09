@@ -26,8 +26,6 @@ const mapFirebaseUser = (firebaseUser: FirebaseUser): User => ({
 const signInWithGoogle =
   (pendingNavigation: string | null) => async (dispatch: AppDispatch) => {
     try {
-      console.log("Signing in with Google...");
-
       dispatch(setLoading(true));
       dispatch(clearError());
 
@@ -69,14 +67,7 @@ const signOut = () => async (dispatch: AppDispatch) => {
 const setUserInfo =
   (firebaseUser: FirebaseUser | null) => async (dispatch: AppDispatch) => {
     if (firebaseUser) {
-      dispatch(
-        setUser({
-          uid: firebaseUser.uid,
-          email: firebaseUser.email,
-          displayName: firebaseUser.displayName,
-          photoURL: firebaseUser.photoURL,
-        })
-      );
+      dispatch(setUser(mapFirebaseUser(firebaseUser)));
     } else {
       dispatch(setUser(null));
     }

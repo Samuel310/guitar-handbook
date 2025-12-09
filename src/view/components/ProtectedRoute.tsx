@@ -1,13 +1,13 @@
 import { type ReactNode } from 'react';
 import { Navigate } from 'react-router';
-import { useStateSelector } from '../../store/hooks';
+import { useAppSelector } from '../../store/hooks';
 
 interface ProtectedRouteProps {
   children: ReactNode;
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isAuthenticated, isInitialized, isLoading } = useStateSelector(
+  const { isAuthenticated, isInitialized, isLoading } = useAppSelector(
     (state) => state.auth
   );
 

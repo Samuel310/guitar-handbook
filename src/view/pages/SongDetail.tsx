@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import { useStateSelector, useAppDispatch } from '../../store/hooks';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { updateSong, deleteSong } from '../../store/slice/songBookSlice';
 
 export default function SongDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const song = useStateSelector((state) =>
+  const song = useAppSelector((state) =>
     state.songBook.songs.find((s) => s.id === id)
   );
 
