@@ -19,12 +19,12 @@ export default function SongDetail() {
 
   if (!song) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 p-8">
+      <div className="min-h-screen p-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl font-bold text-white mb-4">Song Not Found</h1>
+          <h1 className="text-3xl font-bold text-amber-900 mb-4">Song Not Found</h1>
           <button
             onClick={() => navigate("/songbook")}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-md"
           >
             Back to Song Book
           </button>
@@ -73,9 +73,9 @@ export default function SongDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen p-4 sm:p-6 md:p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-slate-800 rounded-lg shadow-2xl p-4 sm:p-6 md:p-8">
+        <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4 sm:p-6 md:p-8 border border-amber-200">
           {/* Header */}
           <div className="flex justify-between items-start mb-4 sm:mb-6">
             <div className="flex-1">
@@ -84,14 +84,14 @@ export default function SongDetail() {
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full bg-slate-700 text-white px-3 sm:px-4 py-2 rounded-lg border-2 border-slate-600 focus:border-blue-500 focus:outline-none text-xl sm:text-2xl font-bold"
+                  className="w-full bg-white text-stone-800 px-3 sm:px-4 py-2 rounded-lg border-2 border-amber-300 focus:border-orange-500 focus:outline-none text-xl sm:text-2xl font-bold shadow-sm"
                 />
               ) : (
-                <h1 className="text-2xl sm:text-3xl font-bold text-white">
+                <h1 className="text-2xl sm:text-3xl font-bold text-amber-900">
                   {song.title}
                 </h1>
               )}
-              <p className="text-slate-400 text-sm mt-2">
+              <p className="text-stone-500 text-sm mt-2">
                 Last updated: {new Date(song.updatedAt).toLocaleString()}
               </p>
             </div>
@@ -104,10 +104,10 @@ export default function SongDetail() {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 rows={20}
-                className="w-full bg-slate-700 text-white px-4 py-3 rounded-lg border-2 border-slate-600 focus:border-blue-500 focus:outline-none font-mono"
+                className="w-full bg-white text-stone-800 px-4 py-3 rounded-lg border-2 border-amber-300 focus:border-orange-500 focus:outline-none font-mono shadow-sm"
               />
             ) : (
-              <div className="bg-slate-700 rounded-lg p-6 text-white whitespace-pre-wrap font-mono">
+              <div className="bg-amber-50 rounded-lg p-6 text-stone-800 whitespace-pre-wrap font-mono border border-amber-200">
                 {song.content || "No content yet."}
               </div>
             )}
@@ -120,7 +120,7 @@ export default function SongDetail() {
                 <button
                   onClick={handleSave}
                   disabled={isLoading}
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {isLoading ? "Saving..." : "Save Changes"}
                 </button>
@@ -131,7 +131,7 @@ export default function SongDetail() {
                     setIsEditing(false);
                   }}
                   disabled={isLoading}
-                  className="flex-1 bg-slate-600 hover:bg-slate-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 bg-stone-400 hover:bg-stone-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   Cancel
                 </button>
@@ -145,21 +145,21 @@ export default function SongDetail() {
                     setIsEditing(true);
                   }}
                   disabled={isLoading}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 bg-orange-500 hover:bg-orange-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   Edit Song
                 </button>
                 <button
                   onClick={handleDelete}
                   disabled={isLoading}
-                  className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto bg-rose-500 hover:bg-rose-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   {isLoading ? "Deleting..." : "Delete"}
                 </button>
                 <button
                   onClick={() => navigate("/songbook")}
                   disabled={isLoading}
-                  className="w-full sm:w-auto bg-slate-600 hover:bg-slate-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto bg-stone-400 hover:bg-stone-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
                 >
                   Back
                 </button>

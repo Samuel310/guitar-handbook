@@ -24,28 +24,28 @@ export default function Nashville() {
 
   if (isLoading || !currentData) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 p-4 sm:p-6 md:p-8 flex items-center justify-center">
-        <div className="text-white text-xl">Loading chords data...</div>
+      <div className="min-h-screen p-4 sm:p-6 md:p-8 flex items-center justify-center">
+        <div className="text-amber-900 text-xl font-semibold">Loading chords data...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen p-4 sm:p-6 md:p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 sm:mb-8 text-center">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-900 mb-6 sm:mb-8 text-center">
           Nashville Number System
         </h1>
 
         {/* Key Selector */}
-        <div className="bg-slate-800 rounded-lg p-4 sm:p-6 mb-6 sm:mb-8 shadow-xl">
-          <label className="block text-slate-300 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
+        <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 mb-6 sm:mb-8 shadow-md border border-amber-200">
+          <label className="block text-stone-700 font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
             Select Key:
           </label>
           <select
             value={selectedKey}
             onChange={(e) => setSelectedKey(e.target.value)}
-            className="w-full bg-slate-700 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 border-slate-600 focus:border-purple-500 focus:outline-none text-sm sm:text-base"
+            className="w-full bg-white text-stone-800 px-3 sm:px-4 py-2 sm:py-3 rounded-lg border-2 border-amber-300 focus:border-amber-500 focus:outline-none text-sm sm:text-base shadow-sm"
           >
             {keyGroups.map((item) => (
               <option key={item} value={item}>
@@ -57,7 +57,7 @@ export default function Nashville() {
 
         {/* Chords Table */}
         {currentData.length === 0 ? (
-          <div className="text-center text-white text-lg">
+          <div className="text-center text-stone-700 text-lg">
             No chords data available for the selected key.
           </div>
         ) : null}
@@ -67,9 +67,9 @@ export default function Nashville() {
               return (
                 <div
                   key={mainIndex}
-                  className="bg-slate-800 rounded-lg shadow-2xl overflow-hidden mb-6 sm:mb-8"
+                  className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden mb-6 sm:mb-8 border border-amber-200"
                 >
-                  <div className="p-4 sm:p-6 bg-linear-to-r from-purple-600 to-pink-600">
+                  <div className="p-4 sm:p-6 bg-gradient-to-r from-amber-400 to-orange-500">
                     <h2 className="text-xl sm:text-2xl font-bold text-white text-center">
                       {chordData.key}
                     </h2>
@@ -79,15 +79,15 @@ export default function Nashville() {
                     <table className="w-full table-fixed sm:table-auto">
                       <tbody>
                         {/* Nashville Numbers Row */}
-                        <tr className="bg-slate-700 border-b-2 border-slate-600">
-                          <td className="px-1.5 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 font-bold text-purple-400 text-xs sm:text-sm md:text-base lg:text-lg w-16 sm:w-auto">
+                        <tr className="bg-amber-100 border-b-2 border-amber-300">
+                          <td className="px-1.5 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 font-bold text-amber-800 text-xs sm:text-sm md:text-base lg:text-lg w-16 sm:w-auto">
                             Nash
                             <span className="hidden sm:inline">ville</span>
                           </td>
                           {chordData.chords.map((_, index) => (
                             <td
                               key={index}
-                              className="px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-center font-bold text-white text-xs sm:text-sm md:text-base lg:text-lg"
+                              className="px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-center font-bold text-stone-800 text-xs sm:text-sm md:text-base lg:text-lg"
                             >
                               {index + 1}
                             </td>
@@ -95,14 +95,14 @@ export default function Nashville() {
                         </tr>
 
                         {/* Chords Row */}
-                        <tr className="bg-slate-750 border-b-2 border-slate-600">
-                          <td className="px-1.5 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 font-bold text-pink-400 text-xs sm:text-sm md:text-base lg:text-lg w-16 sm:w-auto">
+                        <tr className="bg-orange-50 border-b-2 border-orange-200">
+                          <td className="px-1.5 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 font-bold text-orange-800 text-xs sm:text-sm md:text-base lg:text-lg w-16 sm:w-auto">
                             Chords
                           </td>
                           {chordData.chords.map((chord, index) => (
                             <td
                               key={index}
-                              className="px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-center font-bold text-white text-xs sm:text-sm md:text-base lg:text-lg bg-slate-700"
+                              className="px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-center font-bold text-stone-800 text-xs sm:text-sm md:text-base lg:text-lg bg-white"
                             >
                               {chord}
                             </td>
@@ -110,14 +110,14 @@ export default function Nashville() {
                         </tr>
 
                         {/* Notes Row */}
-                        <tr className="bg-slate-800">
-                          <td className="px-1.5 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 font-bold text-cyan-400 text-xs sm:text-sm md:text-base lg:text-lg w-16 sm:w-auto">
+                        <tr className="bg-rose-50">
+                          <td className="px-1.5 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 font-bold text-rose-800 text-xs sm:text-sm md:text-base lg:text-lg w-16 sm:w-auto">
                             Notes
                           </td>
                           {chordData.notes.map((note, index) => (
                             <td
                               key={index}
-                              className="px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-center font-bold text-white text-xs sm:text-sm md:text-base lg:text-lg"
+                              className="px-1 sm:px-2 md:px-4 lg:px-6 py-2 sm:py-3 md:py-4 text-center font-bold text-stone-800 text-xs sm:text-sm md:text-base lg:text-lg"
                             >
                               {note}
                             </td>
@@ -132,8 +132,8 @@ export default function Nashville() {
           : null}
 
         {/* Info Section */}
-        <div className="mt-6 sm:mt-8 bg-slate-800 rounded-lg p-4 sm:p-6 text-slate-300">
-          <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">
+        <div className="mt-6 sm:mt-8 bg-white/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 shadow-md border border-amber-200 text-stone-700">
+          <h3 className="text-lg sm:text-xl font-bold text-amber-900 mb-2 sm:mb-3">
             About Nashville Number System
           </h3>
           <p className="leading-relaxed text-sm sm:text-base">
