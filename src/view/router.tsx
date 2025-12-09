@@ -1,27 +1,11 @@
-import { createBrowserRouter, redirect } from "react-router";
+import { createHashRouter, redirect } from "react-router";
 import { store } from "../store/store";
-import { loadChordsMap } from "../controller/chordsMapController";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Nashville from "./pages/Nashville";
 import SongBook from "./pages/SongBook";
 import SongEditor from "./pages/SongEditor";
 import SongDetail from "./pages/SongDetail";
-
-// Loader for Nashville route - loads chords map from Firestore
-const nashvilleLoader = async () => {
-  const state = store.getState();
-
-  if (!state.auth.isAuthenticated) {
-    return redirect("/");
-  }
-
-  if (!state.chordsMap.isLoaded || state.chordsMap.chordsMap.length === 0) {
-    await store.dispatch(loadChordsMap());
-  }
-
-  return null;
-};
 
 // Protected route loader - checks authentication
 const protectedLoader = async () => {
@@ -36,7 +20,7 @@ const protectedLoader = async () => {
 
 export const PROTECTED_ROUTES = ["/nashville", "/songbook"];
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     element: <Layout />,
     children: [
@@ -47,7 +31,7 @@ export const router = createBrowserRouter([
       {
         path: "/nashville",
         element: <Nashville />,
-        loader: nashvilleLoader,
+        loader: protectedLoader,
       },
       {
         path: "/songbook",

@@ -1,13 +1,20 @@
-import { useState, useMemo } from "react";
-import { useAppSelector } from "../../store/hooks";
+import { useState, useMemo, useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { loadChordsMap } from "../../controller/chordsMapController";
 
 const keyGroups: string[] = ["C", "D", "E", "F", "G", "A", "B"];
 
 export default function Nashville() {
+  const dispatch = useAppDispatch();
   const [selectedKey, setSelectedKey] = useState<string>(keyGroups[0]);
 
   const chordsMap = useAppSelector((state) => state.chordsMap.chordsMap);
   const isLoading = useAppSelector((state) => state.chordsMap.isLoading);
+
+  // Load chords map data when component mounts
+  useEffect(() => {
+    dispatch(loadChordsMap());
+  }, [dispatch]);
 
   const currentData = useMemo(() => {
     return chordsMap.filter((chord) => {
